@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Ubuntu Checklist | ThunderStrike XIII</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../../dashboard/assets/css/main.css" />
+		<link rel="icon" href="../../images/tabicon.png">
+	</head>
+	<body id="body">
+		<div id="entirething">
+		<!-- Header -->
+			<header id="header">
+				<a href="../../dashboard/" class="logo"><strong>ThunderStrike</strong> XIII</a>
+				<nav>
+					<a href="#menu"></a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="../../dashboard/">Home</a></li>
+                    <li><a href="../">Round 3</a></li>
+					<li><a href="../../dashboard/myprofile/">My Profile</a></li>
+					<li><a href="../../dashboard/contact/">Contact</a></li>
+					<li><a href="javascript:logout()">Logout</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<section id="main">
+				<div class="inner">
+					<div class="image fit">
+						<img src="../../images/ubuntu-logo14.png" alt="" />
+					</div>
+					<header>
+						<h1>Ubuntu Checklist</h1>
+						<p class="info">For Ubuntu 18</a></p>
+					</header>
+					<p><strong>The Round 3 Ubuntu Checklist:</strong><br />
+					   <ol>
+						<li>Thoroughly read the README and make noted</li>
+						<li>Run updates first, before anything. Make sure they start automatically</li>
+						<li>Perform User Auditing</li>
+						<li>Disable the Guest User</li>
+						<li>Secure the Root User</li>
+						<li>Answer the Forensic Questions</li>
+						<li>Enforce Password Requirements, Lockout Policies, and Audit Policies</li>
+						<li>Enable Firewall</li>
+						<li>Download AVG AntiVirus</li>
+						<li>Delete Unwanted Applications</li>
+						<li>Delete Prohibited Files</li>
+						<li>Disable Bad Services</li>
+						<li>Check services -- delete things like ftp (pure-ftpd)</li>
+						<li>Make sure Computer Goes to sleep when idle.</li>
+						<li>Try making the Security Level High</li>
+						<li>Do anything the README specifically tells you to do.</li>
+						<li>Make sure Firefox and other apps mentioned in the README are up to date.</li>
+						<li>Use Vulnerability Lists to help discover more vulnerabilities.</li>
+						<li>Use Windows Vulnerabilities and attempt to implement them into Ubuntu</li>
+						<li>Use the CyberPatriot website (<a href="https://www.uscyberpatriot.org/competition/training-materials/training-modules">https://www.uscyberpatriot.org/competition/training-materials/training-modules</a>) to find more vulnerabilities.</li>
+					</ol></p>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					&copy; 2020-2021 ThunderStrike XIII.
+				</div>
+			</footer>
+		</div>
+		<!-- Scripts -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
+		<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyA2K1TNug5pRT3rzveTjhvlbTsQ3ENWJww",
+			authDomain: "sfhs-cyberpatriot.firebaseapp.com",
+			projectId: "sfhs-cyberpatriot",
+			storageBucket: "sfhs-cyberpatriot.appspot.com",
+			messagingSenderId: "901458952332",
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		</script>
+		<script>
+		firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			if(user !=null) {
+				var email_id = user.email;
+				var email_verified = user.emailVerified;
+				var username = user.displayName;
+				if (email_verified === false) {
+					window.location.replace("../../dashboard/")
+				} else {
+					document.getElementById('entirething').style.display = "block";
+				}
+			}
+			
+		} else {
+			window.location.replace("../../")
+		}
+		});
+
+		function logout () {
+			firebase.auth().signOut();
+		}
+
+		function refresh() {
+			window.location.reload();
+    }
+    
+		</script>
+			<script src="../../dashboard/assets/js/jquery.min.js"></script>
+			<script src="../../dashboard/assets/js/jquery.scrolly.min.js"></script>
+			<script src="../../dashboard/assets/js/skel.min.js"></script>
+			<script src="../../dashboard/assets/js/util.js"></script>
+			<script src="../../dashboard/assets/js/main.js"></script>
+
+	</body>
+</html>

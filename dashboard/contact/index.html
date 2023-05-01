@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Contact | ThunderStrike XIII</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="icon" href="../../images/tabicon.png">
+	</head>
+	<body id="body">
+		<div id="entirething">
+		<!-- Header -->
+			<header id="header">
+				<a href="../" class="logo"><strong>ThunderStrike</strong> XIII</a>
+				<nav>
+					<a href="#menu"></a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="../">Home</a></li>
+					<li><a href="../../round3/">Round 3</a></li>
+                    <li><a href="../myprofile/">My Profile</a></li>
+                    <li><a href="">Contact</a></li>
+					<li><a href="javascript:logout()">Logout</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<section id="main">
+				<div class="inner">
+					<header>
+						<h1>Contact Form</h1>
+						<p class="info">Goes to Pranav Bhagam</a></p>
+					</header>
+					<script type="text/javascript">var submitted=false;</script>
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display: none" onload="if(submitted){document.getElementById('sucess').innerHTML = 'Message sent sucessfully.'}"></iframe>
+                    <p style="color: green; text-decoration: underline;" id="sucess"></p>
+                    <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScKUf5UmcxoOED0vrlQvJrYH-eyt1s5Fofckk5o2PEROWABxg/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true">
+                        <div class="row uniform 50%">
+                            <div class="6u 12u$(xsmall)">
+                                <input type="text" name="entry.986991404" id="name" value="" placeholder="Name" />
+                            </div>
+                            <div class="6u$ 12u$(xsmall)">
+                                <input type="email" name="entry.380961051" id="email" value="" placeholder="Email" />
+                            </div>
+                            <div class="12u$">
+                                <textarea  name="entry.11778052" placeholder="Enter your message" rows="6"></textarea>
+                            </div>
+                            <div class="12u$">
+                                <ul class="actions">
+                                    <li><input type="submit" value="Send Message" class="special" /></li>
+                                    <li><input type="reset" value="Reset" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					&copy; 2020-2021 ThunderStrike XIII.
+				</div>
+			</footer>
+		</div>
+		<!-- Scripts -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
+		<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyA2K1TNug5pRT3rzveTjhvlbTsQ3ENWJww",
+			authDomain: "sfhs-cyberpatriot.firebaseapp.com",
+			projectId: "sfhs-cyberpatriot",
+			storageBucket: "sfhs-cyberpatriot.appspot.com",
+			messagingSenderId: "901458952332",
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		</script>
+		<script>
+		firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			if(user !=null) {
+				var email_id = user.email;
+				var email_verified = user.emailVerified;
+				var username = user.displayName;
+				var userid = user.uid;
+				if (email_verified === false) {
+					window.location.replace("../")
+				} else {
+					document.getElementById('entirething').style.display = "block";
+				}
+				if(userid === "fill revoked user uid here") {
+					document.getElementById('entirething').innerHTML = "<h1>" + username + ", your access to this page has been revoked!"
+				}
+			}
+			
+		} else {
+			window.location.replace("../")
+		}
+		});
+
+		function logout () {
+			firebase.auth().signOut();
+		}
+
+		function refresh() {
+			window.location.reload();
+    }
+    
+		</script>
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Round 3 | ThunderStrike XIII</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../dashboard/assets/css/main.css" />
+		<link rel="icon" href="../images/tabicon.png">
+	</head>
+	<body id="body">
+		<div id="entirething">
+		<!-- Header -->
+			<header id="header">
+				<a href="../dashboard/" class="logo"><strong>ThunderStrike</strong> XIII</a>
+				<nav>
+					<a href="#menu"></a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="../dashboard/">Home</a></li>
+					<li><a href="">Round 3</a></li>
+					<li><a href="../dashboard/myprofile/">My Profile</a></li>
+					<li><a href="../dashboard/contact/">Contact</a></li>
+					<li><a href="javascript:logout()">Logout</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<section id="main">
+				<div class="inner">
+					<div class="image fit">
+						<img src="../images/Lock HERO.jpg" alt="" />
+					</div>
+					<header>
+						<h1>Round 3</h1>
+						<p class="info">January 22-23, 2020</a></p>
+					</header>
+					<p>Round 3 of CyberPatriot XIII will be on January 22-23, 2021. The three images we will be competing on are <strong>Windows 10, Windows Server 2019,</strong> and <strong>Ubuntu 18.</strong> We will also be completing Cisco Modules 1-15. The roles are as follows:
+						<ul>
+							<li><strong>Windows 10:</strong> Myviord Djaja</li>
+							<li><strong>Windows Server 2019:</strong> Pranav Bhagam</li>
+							<li><strong>Ubuntu 18:</strong> Sahith Rajesh & Arpit Mittal</li>
+							<li><strong>Cisco Modules 1-15:</strong> Sai Vanam & Arpit Mittal</li>
+						</ul>
+					</p>
+					<p>The Windows Checklist can be found <a href='../round3/windows/'>here</a> and the Ubuntu Checklist can be found <a href='../round3/ubuntu/'>here.</a></p>
+					<header id="meeting">
+						<h1>Meeting on January 21st</h1>
+						<p class="info">8:30 PM</p>
+					</header>
+					<p>
+						In this meeting, we will be discussing Round 3 and more challenging vulnerabilites. Agenda will be updated here. <a target="_blank" href="https://meet.google.com/owv-xqum-rew">You can join the meeting here!</a> The meeting will be live-streamed here:<br />
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/ihchtCNFe3U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					&copy; 2020-2021 ThunderStrike XIII.
+				</div>
+			</footer>
+		</div>
+		<!-- Scripts -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
+		<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyA2K1TNug5pRT3rzveTjhvlbTsQ3ENWJww",
+			authDomain: "sfhs-cyberpatriot.firebaseapp.com",
+			projectId: "sfhs-cyberpatriot",
+			storageBucket: "sfhs-cyberpatriot.appspot.com",
+			messagingSenderId: "901458952332",
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		</script>
+		<script>
+		firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			if(user !=null) {
+				var email_id = user.email;
+				var email_verified = user.emailVerified;
+				var username = user.displayName;
+				if (email_verified === false) {
+					window.location.replace("../dashboard/")
+				} else {
+					document.getElementById('entirething').style.display = "block";
+				}
+			}
+			
+		} else {
+			window.location.replace("../")
+		}
+		});
+
+		function logout () {
+			firebase.auth().signOut();
+		}
+
+		function refresh() {
+			window.location.reload();
+    }
+    
+		</script>
+			<script src="../dashboard/assets/js/jquery.min.js"></script>
+			<script src="../dashboard/assets/js/jquery.scrolly.min.js"></script>
+			<script src="../dashboard/assets/js/skel.min.js"></script>
+			<script src="../dashboard/assets/js/util.js"></script>
+			<script src="../dashboard/assets/js/main.js"></script>
+
+	</body>
+</html>

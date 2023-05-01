@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<body id="body">
+    <h1 id="test"></h1>
+    <a href="javascript:logout()">Logout</a>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyA2K1TNug5pRT3rzveTjhvlbTsQ3ENWJww",
+    authDomain: "sfhs-cyberpatriot.firebaseapp.com",
+    projectId: "sfhs-cyberpatriot",
+    storageBucket: "sfhs-cyberpatriot.appspot.com",
+    messagingSenderId: "901458952332",
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script>
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+      document.getElementById('body').style.display = 'block'
+      if(user !=null) {
+        var email_id = user.email;
+        var email_verified = user.emailVerified;
+        var username = user.displayName;
+        document.getElementById('test').innerHTML = "Test Login" + username + email_id + "</u>!";
+        if (email_verified === false) {
+          document.getElementById('test').innerHTML = "Please verify your email.";
+          window.setInterval('refresh()', 3000);
+        } else {
+          document.getElementById('test').innerHTML = "Test Login" + username + email_id;
+        }
+      }
+    
+  } else {
+      window.location.replace("../")
+  }
+});
+
+function logout () {
+    firebase.auth().signOut();
+}
+
+function refresh() {
+  window.location.reload();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>My Profile | ThunderStrike XIII</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="icon" href="../../images/tabicon.png">
+	</head>
+	<body id="body">
+		<div id="entirething">
+		<!-- Header -->
+			<header id="header">
+				<a href="../" class="logo"><strong>ThunderStrike</strong> XIII</a>
+				<nav>
+					<a href="#menu"></a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="../">Home</a></li>
+                    <li><a href="../../round3/">Round 3</a></li>
+                    <li><a href="">My Profile</a></li>
+                    <li><a href="../contact/">Contact</a></li>
+					<li><a href="javascript:logout()">Logout</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<section id="main">
+				<div class="inner">
+					<header>
+						<h1>My Profile</h1>
+						<p id="info" class="info"></p>
+					</header>
+                    <h2>Reset Password</h2>
+                    <p id="error" style="color: red; text-decoration: underline;"></p>
+                    <div class="row uniform 50%">
+                        <div class="6u 12u$(xsmall)">
+                            <input type="password" id="password_field" placeholder="New Password">
+                        </div>
+                        <div class="6u$ 12u$(xsmall)">
+                            <input type="password" id="confirm_password" placeholder="Confirm Password">
+                        </div>
+                    </div><br />
+                    <button class="button special" id="changepassword" onclick="changePassword()">Reset Password</button><br /><br />
+                    <h2>Change Email Address</h2>
+                    <p id="emailinfo" class="info"></p>
+                    <p id="error2" style="color: red; text-decoration: underline;"></p>
+                    <div class="row uniform 50%">
+                        <div class="6u 12u$(xsmall)">
+                            <input type="email" id="new_email" placeholder="New Email">
+                        </div>
+                        <div class="6u$ 12u$(xsmall)">
+                            <input type="Email" id="confirm__email" placeholder="Confirm Email">
+                        </div>
+                    </div><br />
+                    <button class="button special" id="changeemail" onclick="changeemail()">Change Email</button>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					&copy; 2020-2021 ThunderStrike XIII.
+				</div>
+			</footer>
+		</div>
+		<!-- Scripts -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
+		<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyA2K1TNug5pRT3rzveTjhvlbTsQ3ENWJww",
+			authDomain: "sfhs-cyberpatriot.firebaseapp.com",
+			projectId: "sfhs-cyberpatriot",
+			storageBucket: "sfhs-cyberpatriot.appspot.com",
+			messagingSenderId: "901458952332",
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		</script>
+		<script>
+            var input = document.getElementById("confirm_password");
+            input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("changepassword").click();
+            }
+            });
+
+
+		firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			if(user !=null) {
+				var email_id = user.email;
+				var email_verified = user.emailVerified;
+                var username = user.displayName;
+                document.getElementById('entirething').style.display = "block";
+                document.getElementById('info').innerHTML = username;
+                document.getElementById('emailinfo').innerHTML = "Your current email address is <strong>" + email_id + "</strong>."
+			}
+			
+		} else {
+			window.location.replace("../../")
+		}
+		});
+
+		function logout () {
+			firebase.auth().signOut();
+		}
+
+		function refresh() {
+			window.location.reload();
+    }
+
+        function changePassword () {
+            var newPwd = document.getElementById("password_field").value;
+            var confirmPwd = document.getElementById("confirm_password").value;
+            var user = firebase.auth().currentUser;
+
+            if (newPwd != confirmPwd) {
+                document.getElementById('error').style.color = "red";
+                document.getElementById('error').style.textDecoration = "underline";
+                document.getElementById("error").innerHTML = "The two passwords must match.";
+            } else {
+                user.updatePassword(newPwd).then(function() {;
+                    document.getElementById('error').style.color = "green";
+                    document.getElementById('error').style.textDecoration = "underline";
+                    document.getElementById('error').innerHTML = "Your password has been changed sucessfully."
+                }).catch(function(error) {
+                    document.getElementById('error').style.color = "red";
+                    document.getElementById('error').style.textDecoration = "underline";
+                    document.getElementById("error").innerHTML = errorMessage;
+                });
+            }
+        }
+
+        function changeemail() {
+        var chngEmail = document.getElementById("new_email").value;
+        var confirmEmail = document.getElementById("confirm__email").value;
+        var user = firebase.auth().currentUser;
+
+        if(chngEmail != confirmEmail) {
+            document.getElementById('error2').style.color = "red";
+            document.getElementById('error2').style.textDecoration = "underline";
+            document.getElementById('error2').innerHTML = "The two emails must match."
+        } else {
+            user.updateEmail(chngEmail).then(function() {
+            document.getElementById('error2').style.color = "green";
+            document.getElementById('error2').style.textDecoration = "underline";
+            document.getElementById('error2').innerHTML = "Your email was changed successfully.";
+            // user.sendEmailVerification().then(function() {
+            // }).catch(function(error) {
+            //         window.alert("Error: " + error.message);
+            // });
+             }).catch(function(error) {
+             var errorCode = error.code;
+             var errorMessage = error.message;
+             document.getElementById('error2').style.color = "red";
+             document.getElementById('error2').style.textDecoration = "underline";
+             document.getElementById("error2").innerHTML = "<strong>"+errorMessage+"</strong>";
+             });
+        }
+    }
+    
+		</script>
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

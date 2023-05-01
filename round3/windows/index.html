@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Windows Checklist | ThunderStrike XIII</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../../dashboard/assets/css/main.css" />
+		<link rel="icon" href="../../images/tabicon.png">
+	</head>
+	<body id="body">
+		<div id="entirething">
+		<!-- Header -->
+			<header id="header">
+				<a href="../../dashboard/" class="logo"><strong>ThunderStrike</strong> XIII</a>
+				<nav>
+					<a href="#menu"></a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="../../dashboard/">Home</a></li>
+                    <li><a href="../">Round 3</a></li>
+					<li><a href="../../dashboard/myprofile/">My Profile</a></li>
+					<li><a href="../../dashboard/contact/">Contact</a></li>
+					<li><a href="javascript:logout()">Logout</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<section id="main">
+				<div class="inner">
+					<div class="image fit">
+						<img src="../../images/windows-10-2018-insider-wallpaper.jpg" alt="" />
+					</div>
+					<header>
+						<h1>Windows Checklist</h1>
+						<p class="info">For Windows 10 and Windows Server 2019</a></p>
+					</header>
+					<p><strong>The Round 3 Windows Checklist:</strong><br />
+					   <ol>
+						   <li>Thoroughly read the README and make notes.</li>
+						   <li>Run updates immediately. Turn on Windows Update if not working.</li>
+						   <li>Enable GodMode (<a href="https://www.bleepingcomputer.com/tutorials/enable-godmode-in-windows/">https://www.bleepingcomputer.com/tutorials/enable-godmode-in-windows/</a>)</li>
+						   <li>Answer the Forensic Questions. <strong>Do NOT proceed with any major fixes.</strong></li>
+						   <li>Disable the Guest User and Admin User</li>
+						   <li>Perform User Auditing</li>
+			        	   <li>Go into “secpol.msc” and change the Password Policies, Account Lockout Policies, User Rights Assignments, and Audit Policies.</li>
+						   <li>Disable “Do not require CTRL + ALT + DEL” (services.msc)</li>
+						   <li>Check on the updates. Restart if needed.</li>
+						   <li>Disable services/features that are unsafe to the computer. Be sure not to disable critical services mentioned in the README.</li>
+						   <li>Scan User Files for Non-Related, music, hacking tools, or games.</li>
+						   <li>Disable File Sharing on the C Drive.</li>
+						   <li>Disable Network Sharing.</li>
+						   <li>Delete suspicious apps. (Programs and Features) (ex. WIRESHARK, VUSE, REAL PLAYER, TEAMVIEWER, DRIVER SUPPORT, SMART PC FIXER.)</li>
+						   <li>Remove any unnecessary startup processes.</li>
+						   <li>Enable Additional LSA Protection</li>
+						   <li>Enable Windows Firewall.</li>
+						   <li>Update Firefox.</li>
+						   <li>Go through Firefox settings.</li>
+						   <li>Check updates again if needed.</li>
+						   <li>Enable Windows Defender (use regedit to fix if not working) and download Avira.</li>
+						   <li>Check ports for malware. (<a href="https://www.bleepingcomputer.com/tutorials/how-malware-hides-as-a-service/">https://www.bleepingcomputer.com/tutorials/how-malware-hides-as-a-service/</a>)</li>
+						   <li>Make sure automatic apps are enabled.</li>
+						   <li>Make sure the computer goes to sleep when idle.</li>
+						   <li>Use Vulnerability Lists to help discover more vulnerabilities.</li>
+						   <li>Use the CyberPatriot website (<a href="https://www.uscyberpatriot.org/competition/training-materials/windows">https://www.uscyberpatriot.org/competition/training-materials/windows</a>) to find more vulnerabilities.</li>
+						</ol></p>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					&copy; 2020-2021 ThunderStrike XIII.
+				</div>
+			</footer>
+		</div>
+		<!-- Scripts -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
+		<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyA2K1TNug5pRT3rzveTjhvlbTsQ3ENWJww",
+			authDomain: "sfhs-cyberpatriot.firebaseapp.com",
+			projectId: "sfhs-cyberpatriot",
+			storageBucket: "sfhs-cyberpatriot.appspot.com",
+			messagingSenderId: "901458952332",
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		</script>
+		<script>
+		firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			if(user !=null) {
+				var email_id = user.email;
+				var email_verified = user.emailVerified;
+				var username = user.displayName;
+				if (email_verified === false) {
+					window.location.replace("../../dashboard/")
+				} else {
+					document.getElementById('entirething').style.display = "block";
+				}
+			}
+			
+		} else {
+			window.location.replace("../../")
+		}
+		});
+
+		function logout () {
+			firebase.auth().signOut();
+		}
+
+		function refresh() {
+			window.location.reload();
+    }
+    
+		</script>
+			<script src="../../dashboard/assets/js/jquery.min.js"></script>
+			<script src="../../dashboard/assets/js/jquery.scrolly.min.js"></script>
+			<script src="../../dashboard/assets/js/skel.min.js"></script>
+			<script src="../../dashboard/assets/js/util.js"></script>
+			<script src="../../dashboard/assets/js/main.js"></script>
+
+	</body>
+</html>
